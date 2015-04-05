@@ -59,8 +59,8 @@ public class PaintSurface extends JComponent {
 				public void mouseReleased(MouseEvent e){//when mouse is released, adds the rectangle 
 									//made to the array of shapes for drawing later on
 					
-					// No 1D shapes.
-					if (startDrag.x == e.getX() && startDrag.y == e.getY()) return;
+					// No 0D or 1D shapes.
+					if (startDrag.x == e.getX() || startDrag.y == e.getY()) return;
 					
 					switch (currentShape) {
 					case Rectangle:
