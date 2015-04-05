@@ -87,6 +87,11 @@ public class PaintSurface extends JComponent {
 			
 		}	
 		
+		public PaintSurface(ImplementedShape currentShape) {
+			this();
+			this.currentShape = currentShape;
+		}
+		
 		// draw grid, then draw shapes
 		public void paint(Graphics g){
 			Graphics2D g2 = (Graphics2D)g;
