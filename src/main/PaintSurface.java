@@ -134,7 +134,7 @@ public class PaintSurface extends JComponent {
 		
 		//makes rectangle based on the minimum x and y values with height and width equal to absolute 
 		//value of y's and x's
-		public Rectangle2D makeRectangle(int x1, int y1, int x2, int y2){
+		private Rectangle2D makeRectangle(int x1, int y1, int x2, int y2){
 			int x = Math.min(x1, x2);
 			int y = Math.min(y1, y2);
 			int height = Math.abs(y1 - y2);
@@ -144,7 +144,7 @@ public class PaintSurface extends JComponent {
 		
 		//makes rectangle based on the minimum x and y values with height and width equal to absolute 
 		//value of y's and x's
-		public Ellipse2D makeEllipse(int x1, int y1, int x2, int y2){
+		private Ellipse2D makeEllipse(int x1, int y1, int x2, int y2){
 			int x = Math.min(x1, x2);
 			int y = Math.min(y1, y2);
 			int height = Math.abs(y1 - y2);
