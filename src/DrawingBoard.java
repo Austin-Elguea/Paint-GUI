@@ -20,7 +20,7 @@ public class DrawingBoard extends JFrame{
 		setVisible(true);
 	}
 	
-	private class PaintSurface extends JComponent{
+	private class PaintSurface extends JComponent {
 		
 		ArrayList<Shape> shapes = new ArrayList<Shape>();
 		Point startDrag, endDrag;
