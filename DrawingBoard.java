@@ -30,12 +30,14 @@ public class DrawingBoard extends JFrame{
 			addMouseListener(new MouseAdapter(){
 				
 				public void mousePressed(MouseEvent e){
-					startDrag = new Point(e.getX(), e.getY());//gets the xy coordinate when mouse is pressed
+					startDrag = new Point(e.getX(), e.getY());//gets the xy coordinate when 
+										  //mouse is pressed
 					endDrag = startDrag;
 					repaint();
 				}
 				
-				public void mouseReleased(MouseEvent e){//when mouse is released, adds the rectangle made to the array of shapes for drawing later on
+				public void mouseReleased(MouseEvent e){//when mouse is released, adds the rectangle 
+									//made to the array of shapes for drawing later on
 					Shape r = makeRectangle(startDrag.x, startDrag.y, e.getX(), e.getY());
 					shapes.add(r);
 					startDrag = null;
@@ -88,7 +90,8 @@ public class DrawingBoard extends JFrame{
 				g2.fill(s);
 			}
 			
-			if(startDrag != null && endDrag != null){//the light gray temporary rectangle when dragging mouse to create shape
+			if(startDrag != null && endDrag != null){//the light gray temporary rectangle when dragging mouse
+								//to create shape
 				g2.setPaint(Color.LIGHT_GRAY);
 				Shape r = makeRectangle(startDrag.x, startDrag.y, endDrag.x, endDrag.y);
 				g2.draw(r);
@@ -97,7 +100,8 @@ public class DrawingBoard extends JFrame{
 	}
 		
 		
-		//makes rectangle based on the minimum x and y values with height and width equal to absolute value of y's and x's
+		//makes rectangle based on the minimum x and y values with height and width equal to absolute 
+		//value of y's and x's
 		public Rectangle2D.Float makeRectangle(int x1, int y1, int x2, int y2){
 			int x = Math.min(x1, x2);
 			int y = Math.min(y1, y2);
