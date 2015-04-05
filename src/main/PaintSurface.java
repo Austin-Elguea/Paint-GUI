@@ -142,7 +142,7 @@ public class PaintSurface extends JComponent {
 			return new Rectangle2D.Double(x, y, width, height);//returns the rectangle made with the above
 		}
 		
-		//makes rectangle based on the minimum x and y values with height and width equal to absolute 
+		//makes ellipse based on the minimum x and y values with height and width equal to absolute 
 		//value of y's and x's
 		private Ellipse2D makeEllipse(int x1, int y1, int x2, int y2){
 			int x = Math.min(x1, x2);
