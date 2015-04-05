@@ -30,6 +30,11 @@ public class PaintSurface extends JComponent {
 			return shapes;
 		}
 		
+		public void clearShapes() {
+			shapes = new ArrayList<Shape>();
+			repaint();
+		}
+
 		public ImplementedShape getCurrentShape() {
 			return currentShape;
 		}
@@ -42,7 +47,7 @@ public class PaintSurface extends JComponent {
 
 			currentShape = ImplementedShape.Rectangle;
 			
-			addMouseListener(new MouseAdapter(){
+			addMouseListener(new MouseAdapter() {
 				
 				public void mousePressed(MouseEvent e){
 					startDrag = new Point(e.getX(), e.getY());//gets the xy coordinate when 
@@ -82,13 +87,13 @@ public class PaintSurface extends JComponent {
 			
 		}	
 		
-		//draw grid, then draw shapes
+		// draw grid, then draw shapes
 		public void paint(Graphics g){
 			Graphics2D g2 = (Graphics2D)g;
 			
 			g2.setPaint(Color.LIGHT_GRAY);
 			
-			//lines 66-75 make the grid background for the jframe
+			// lines 66-75 make the grid background for the jframe
 			for(int i = 0; i < getSize().width; i+=20){
 				Shape line = new Line2D.Float(i, 0, i, getSize().height);
 				g2.draw(line);
@@ -99,21 +104,21 @@ public class PaintSurface extends JComponent {
 				g2.draw(line);
 			}
 			
-			//just some colors to make rectangles look pretty
+			// just some colors to make shapes look pretty
 			Color[] colors = {Color.RED, Color.BLUE, Color.GREEN, Color.YELLOW, Color.MAGENTA,
 								Color.PINK, Color.white};
 			
 			int colorIndex = 0;
 			
-			//lines 84-89 paint the array of rectangles on the screen, changing colors each time
-			for(Shape s : shapes){
+			// lines 84-89 paint the array of rectangles on the screen, changing colors each time
+			for(Shape s : shapes) {
 				g2.setPaint(Color.black);
 				g2.draw(s);
 				g2.setPaint(colors[(colorIndex++)%colors.length]);
 				g2.fill(s);
 			}
 			
-			if(startDrag != null && endDrag != null){//the light gray temporary rectangle when dragging mouse
+			if(startDrag != null && endDrag != null){//the light gray temporary shape when dragging mouse
 								//to create shape
 				g2.setPaint(Color.LIGHT_GRAY);
 				
