@@ -49,15 +49,19 @@ public class PaintSurface extends JComponent {
 			
 			addMouseListener(new MouseAdapter() {
 				
-				public void mousePressed(MouseEvent e){
-					startDrag = new Point(e.getX(), e.getY());//gets the xy coordinate when 
-										  //mouse is pressed
+				public void mousePressed(MouseEvent e) {
+					startDrag = new Point(e.getX(), e.getY());	// gets the xy coordinate when 
+										  						// mouse is pressed
 					endDrag = startDrag;
 					repaint();
 				}
 				
 				public void mouseReleased(MouseEvent e){//when mouse is released, adds the rectangle 
 									//made to the array of shapes for drawing later on
+					
+					// No 1D shapes.
+					if (startDrag.x == e.getX() && startDrag.y == e.getY()) return;
+					
 					switch (currentShape) {
 					case Rectangle:
 						Shape r = makeRectangle(startDrag.x, startDrag.y, e.getX(), e.getY());
