@@ -1,3 +1,5 @@
+package main;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -6,6 +8,7 @@ import java.awt.Shape;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
@@ -13,11 +16,31 @@ import java.util.ArrayList;
 import javax.swing.JComponent;
 
 public class PaintSurface extends JComponent {
+	
+		// Implemented shapes.
+		public enum ImplementedShape {
+			Rectangle, Ellipse;
+		}
 		
-		ArrayList<Shape> shapes = new ArrayList<Shape>();
-		Point startDrag, endDrag;
+		private ArrayList<Shape> shapes = new ArrayList<Shape>();
+		private Point startDrag, endDrag;
+		private ImplementedShape currentShape;
 		
+		public ArrayList<Shape> getShapes() {
+			return shapes;
+		}
+		
+		public ImplementedShape getCurrentShape() {
+			return currentShape;
+		}
+
+		public void setCurrentShape(ImplementedShape currentShape) {
+			this.currentShape = currentShape;
+		}
+
 		public PaintSurface(){
+
+			currentShape = ImplementedShape.Rectangle;
 			
 			addMouseListener(new MouseAdapter(){
 				
@@ -30,8 +53,17 @@ public class PaintSurface extends JComponent {
 				
 				public void mouseReleased(MouseEvent e){//when mouse is released, adds the rectangle 
 									//made to the array of shapes for drawing later on
-					Shape r = makeRectangle(startDrag.x, startDrag.y, e.getX(), e.getY());
-					shapes.add(r);
+					switch (currentShape) {
+					case Rectangle:
+						Shape r = makeRectangle(startDrag.x, startDrag.y, e.getX(), e.getY());
+						shapes.add(r);
+						break;
+						
+					case Ellipse:
+						Shape c = makeEllipse(startDrag.x, startDrag.y, e.getX(), e.getY());
+						shapes.add(c);
+						break;
+					}
 					startDrag = null;
 					endDrag = null;
 					repaint();
@@ -48,13 +80,12 @@ public class PaintSurface extends JComponent {
 				
 			});
 			
-		}
-		
-	
+		}	
 		
 		//draw grid, then draw shapes
 		public void paint(Graphics g){
 			Graphics2D g2 = (Graphics2D)g;
+			
 			g2.setPaint(Color.LIGHT_GRAY);
 			
 			//lines 66-75 make the grid background for the jframe
@@ -85,20 +116,40 @@ public class PaintSurface extends JComponent {
 			if(startDrag != null && endDrag != null){//the light gray temporary rectangle when dragging mouse
 								//to create shape
 				g2.setPaint(Color.LIGHT_GRAY);
-				Shape r = makeRectangle(startDrag.x, startDrag.y, endDrag.x, endDrag.y);
-				g2.draw(r);
+				
+				// You can add more shapes here.
+				switch (currentShape) {
+				case Rectangle:
+					Shape r = makeRectangle(startDrag.x, startDrag.y, endDrag.x, endDrag.y);
+					g2.draw(r);
+					break;
+				
+				case Ellipse:
+					Shape c = makeEllipse(startDrag.x, startDrag.y, endDrag.x, endDrag.y);
+					g2.draw(c);
+					break;
+				}
 			}
 		}
 		
-		
 		//makes rectangle based on the minimum x and y values with height and width equal to absolute 
 		//value of y's and x's
-		public Rectangle2D.Float makeRectangle(int x1, int y1, int x2, int y2){
+		public Rectangle2D makeRectangle(int x1, int y1, int x2, int y2){
 			int x = Math.min(x1, x2);
 			int y = Math.min(y1, y2);
 			int height = Math.abs(y1 - y2);
 			int width = Math.abs(x1 - x2);
-			return new Rectangle2D.Float(x, y, width, height);//returns the rectangle made with the above
+			return new Rectangle2D.Double(x, y, width, height);//returns the rectangle made with the above
+		}
+		
+		//makes rectangle based on the minimum x and y values with height and width equal to absolute 
+		//value of y's and x's
+		public Ellipse2D makeEllipse(int x1, int y1, int x2, int y2){
+			int x = Math.min(x1, x2);
+			int y = Math.min(y1, y2);
+			int height = Math.abs(y1 - y2);
+			int width = Math.abs(x1 - x2);
+			return new Ellipse2D.Double(x, y, width, height);//returns the ellipse made with the above
 		}
 		
 	}
