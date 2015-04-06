@@ -63,6 +63,21 @@ public class PaintPanel extends JPanel {
 		
 		// Make layout.
 		SpringLayout layout = new SpringLayout();
+
+		makeLayout(layout);
+
+		this.setLayout(layout);
+		
+		// Add components.
+		add(lineBtn);
+		add(rectangleBtn);
+		add(clearBtn);
+		add(ellipseBtn);
+		add(surface);
+
+	}
+	
+	public void makeLayout(SpringLayout layout) {
 		
 		layout.putConstraint(SpringLayout.WEST, rectangleBtn, 5, SpringLayout.WEST, this);
 		layout.putConstraint(SpringLayout.NORTH, rectangleBtn, 5, SpringLayout.NORTH, this);
@@ -80,15 +95,5 @@ public class PaintPanel extends JPanel {
 		layout.putConstraint(SpringLayout.NORTH, surface, 0, SpringLayout.NORTH, this);
 		layout.putConstraint(SpringLayout.EAST, surface, 0, SpringLayout.EAST, this);
 		layout.putConstraint(SpringLayout.SOUTH, surface, 0, SpringLayout.SOUTH, this);
-
-		this.setLayout(layout);
-		
-		// Add components.
-		add(lineBtn);
-		add(rectangleBtn);
-		add(clearBtn);
-		add(ellipseBtn);
-		add(surface);
-
 	}
 }
