@@ -71,7 +71,7 @@ public class PaintPanel extends JPanel {
 
 		this.setLayout(layout);
 		
-		// Add buttons.
+		// Add components.
 		add(rectangleBtn);
 		add(clearBtn);
 		add(ellipseBtn);
