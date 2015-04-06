@@ -107,18 +107,6 @@ public class PaintSurface extends JComponent {
 		public void paint(Graphics g){
 			Graphics2D g2 = (Graphics2D)g;
 			
-			g2.setPaint(Color.LIGHT_GRAY);
-			
-			// lines 66-75 make the grid background for the jframe
-			for(int i = 0; i < getSize().width; i+=20){
-				Shape line = new Line2D.Float(i, 0, i, getSize().height);
-				g2.draw(line);
-			}
-			
-			for(int i = 0; i < getSize().width; i+=20){
-				Shape line = new Line2D.Float(0, i, getSize().width, i);
-				g2.draw(line);
-			}
 			
 			// just some colors to make shapes look pretty
 			Color[] colors = {Color.RED, Color.BLUE, Color.GREEN, Color.YELLOW, Color.MAGENTA,
