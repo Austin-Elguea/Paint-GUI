@@ -20,12 +20,15 @@ public class PaintPanel extends JPanel {
 	
 	private PaintSurface surface;
 	
+	private JButton lineBtn;
+	
 	public PaintPanel() {
 		super();
 		
 		surface = new PaintSurface();
 		
 		// Create buttons.
+		lineBtn = new JButton("Line");
 		clearBtn = new JButton("Clear");
 		ellipseBtn = new JButton("Ellipse");
 		rectangleBtn = new JButton("Rectangle");
@@ -52,6 +55,12 @@ public class PaintPanel extends JPanel {
 			}
 		});
 		
+		lineBtn.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				surface.setCurrentShape(ImplementedShape.Line);
+			}
+		});
+		
 		// Make layout.
 		SpringLayout layout = new SpringLayout();
 		
@@ -61,7 +70,10 @@ public class PaintPanel extends JPanel {
 		layout.putConstraint(SpringLayout.WEST, ellipseBtn, 5, SpringLayout.EAST, rectangleBtn);
 		layout.putConstraint(SpringLayout.NORTH, ellipseBtn, 5, SpringLayout.NORTH, this);
 		
-		layout.putConstraint(SpringLayout.WEST, clearBtn, 5, SpringLayout.EAST, ellipseBtn);
+		layout.putConstraint(SpringLayout.WEST, lineBtn, 5, SpringLayout.EAST, ellipseBtn);
+		layout.putConstraint(SpringLayout.NORTH, lineBtn, 5, SpringLayout.NORTH, this);
+		
+		layout.putConstraint(SpringLayout.WEST, clearBtn, 5, SpringLayout.EAST, lineBtn);
 		layout.putConstraint(SpringLayout.NORTH, clearBtn, 5, SpringLayout.NORTH, this);
 		
 		layout.putConstraint(SpringLayout.WEST, surface, 0, SpringLayout.WEST, this);
@@ -72,6 +84,7 @@ public class PaintPanel extends JPanel {
 		this.setLayout(layout);
 		
 		// Add components.
+		add(lineBtn);
 		add(rectangleBtn);
 		add(clearBtn);
 		add(ellipseBtn);
