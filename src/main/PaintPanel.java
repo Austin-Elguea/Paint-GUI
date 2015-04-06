@@ -51,12 +51,12 @@ public class PaintPanel extends JPanel {
 		String[] colorsNames = {"White","Red", "Blue", "Green", "Pink"};
 		final Color[] colors = {Color.WHITE,Color.RED, Color.BLUE, Color.GREEN, Color.pink};
 		
-		backgroundColorPicker = new JComboBox(colorsNames);
+		backgroundColorPicker = new JComboBox<String>(colorsNames);
 		backgroundColorPicker.addItemListener(new ItemListener(){
 
 			public void itemStateChanged(ItemEvent e) {
 				if(e.getStateChange()==ItemEvent.SELECTED){
-					surface.setCurrentBackgroundColor(colors[backgroundColorPicker.getSelectedIndex()]);
+					surface.setBackgroundColor(colors[backgroundColorPicker.getSelectedIndex()]);
 				}
 			}
 			

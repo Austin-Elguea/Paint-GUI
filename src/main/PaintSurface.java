@@ -47,6 +47,14 @@ public class PaintSurface extends JComponent {
 		public void setCurrentShape(ImplementedShape currentShape) {
 			this.currentShape = currentShape;
 		}
+		
+		public void setBackgroundColor(Color c){
+			this.backgroundColor = c;
+		}
+		
+		public Color getBackgroundColor(){
+			return backgroundColor;
+		}
 
 		public PaintSurface(){
 			
@@ -118,16 +126,7 @@ public class PaintSurface extends JComponent {
 			this();
 			this.currentShape = currentShape;
 			this.color = color;
-		}
-		
-		public void setCurrentBackgroundColor(Color c){
-			this.backgroundColor = c;
-		}
-		
-		public Color getCurrentBackgroundColor(){
-			return backgroundColor;
-		}
-		
+		}		
 		
 		// draw grid, then draw shapes
 		public void paint(Graphics g){
@@ -142,7 +141,8 @@ public class PaintSurface extends JComponent {
 		
 			Shape background = makeRectangle(0,0,width,height);
 			g2.draw(background);
-			g2.setPaint(getCurrentBackgroundColor());
+			g2.setPaint(backgroundColor); // NOTE: You can use the variable background color here instead of
+											//  	calling the getBackgroundColor() method bc it is within the class.
 			g2.fill(background);
 			repaint();
 						
