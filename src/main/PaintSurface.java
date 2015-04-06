@@ -52,10 +52,6 @@ public class PaintSurface extends JComponent {
 			this.backgroundColor = c;
 		}
 		
-		public Color getBackgroundColor(){
-			return backgroundColor;
-		}
-
 		public PaintSurface(){
 			
 			
