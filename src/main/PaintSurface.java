@@ -29,7 +29,6 @@ public class PaintSurface extends JComponent {
 		private Point startDrag, endDrag;
 		private ImplementedShape currentShape;
 		private Color color;
-		private Color bakcgroundColor;
 		private Color backgroundColor;
 		
 		public ArrayList<ColoredShape> getShapes() {
