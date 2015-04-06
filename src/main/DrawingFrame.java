@@ -24,8 +24,3 @@ public class DrawingFrame extends JFrame{
 	}
 		
 }
-	
-	
-
-
-
