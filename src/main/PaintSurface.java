@@ -2,10 +2,12 @@ package main;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Shape;
+import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
@@ -27,6 +29,8 @@ public class PaintSurface extends JComponent {
 		private Point startDrag, endDrag;
 		private ImplementedShape currentShape;
 		private Color color;
+		private Color bakcgroundColor;
+		private Color backgroundColor;
 		
 		public ArrayList<ColoredShape> getShapes() {
 			return shapes;
@@ -46,7 +50,6 @@ public class PaintSurface extends JComponent {
 		}
 
 		public PaintSurface(){
-			
 			
 			
 			currentShape = ImplementedShape.Rectangle;
@@ -118,9 +121,30 @@ public class PaintSurface extends JComponent {
 			this.color = color;
 		}
 		
+		public void setCurrentBackgroundColor(Color c){
+			this.backgroundColor = c;
+		}
+		
+		public Color getCurrentBackgroundColor(){
+			return backgroundColor;
+		}
+		
+		
 		// draw grid, then draw shapes
 		public void paint(Graphics g){
 			Graphics2D g2 = (Graphics2D)g;
+			
+			g2.setPaint(Color.WHITE);
+			
+			Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+			int width = (int)screenSize.getWidth();
+			int height = (int)screenSize.getHeight();
+		
+			Shape background = makeRectangle(0,0,width,height);
+			g2.draw(background);
+			g2.setPaint(getCurrentBackgroundColor());
+			g2.fill(background);
+			repaint();
 						
 			// lines 84-89 paint the array of rectangles on the screen, changing colors each time
 			for(ColoredShape s : shapes) {
