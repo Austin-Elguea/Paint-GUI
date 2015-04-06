@@ -23,16 +23,17 @@ public class PaintSurface extends JComponent {
 			Rectangle, Ellipse, Line;
 		}
 		
-		private ArrayList<Shape> shapes = new ArrayList<Shape>();
+		private ArrayList<ColoredShape> shapes = new ArrayList<ColoredShape>();
 		private Point startDrag, endDrag;
 		private ImplementedShape currentShape;
+		private Color color;
 		
-		public ArrayList<Shape> getShapes() {
+		public ArrayList<ColoredShape> getShapes() {
 			return shapes;
 		}
 		
 		public void clearShapes() {
-			shapes = new ArrayList<Shape>();
+			shapes = new ArrayList<ColoredShape>();
 			repaint();
 		}
 
@@ -49,6 +50,7 @@ public class PaintSurface extends JComponent {
 			
 			
 			currentShape = ImplementedShape.Rectangle;
+			color = Color.RED;
 			
 			addMouseListener(new MouseAdapter() {
 				
@@ -68,17 +70,17 @@ public class PaintSurface extends JComponent {
 					switch (currentShape) {
 					case Rectangle:
 						Shape r = makeRectangle(startDrag.x, startDrag.y, e.getX(), e.getY());
-						shapes.add(r);
+						shapes.add(new ColoredShape(color, r));
 						break;
 						
 					case Ellipse:
 						Shape c = makeEllipse(startDrag.x, startDrag.y, e.getX(), e.getY());
-						shapes.add(c);
+						shapes.add(new ColoredShape(color, c));
 						break;
 						
 					case Line:
 						Shape l = makeLine(startDrag.x, startDrag.y, e.getX(), e.getY());
-						shapes.add(l);
+						shapes.add(new ColoredShape(color, l));
 						break;
 						
 					}
@@ -105,23 +107,27 @@ public class PaintSurface extends JComponent {
 			this.currentShape = currentShape;
 		}
 		
+		public PaintSurface(Color color) {
+			this();
+			this.color = color;
+		}
+		
+		public PaintSurface(ImplementedShape currentShape, Color color) {
+			this();
+			this.currentShape = currentShape;
+			this.color = color;
+		}
+		
 		// draw grid, then draw shapes
 		public void paint(Graphics g){
 			Graphics2D g2 = (Graphics2D)g;
-			
-			
-			// just some colors to make shapes look pretty
-			Color[] colors = {Color.RED, Color.BLUE, Color.GREEN, Color.YELLOW, Color.MAGENTA,
-								Color.PINK, Color.white};
-			
-			int colorIndex = 0;
-			
+						
 			// lines 84-89 paint the array of rectangles on the screen, changing colors each time
-			for(Shape s : shapes) {
-				g2.setPaint(colors[(colorIndex++)%colors.length]);
+			for(ColoredShape s : shapes) {
+				g2.setPaint(s.getColor());
 				g2.setStroke(new BasicStroke(4)); //makes graphics more appealing
-				g2.draw(s);
-				g2.fill(s);
+				g2.draw(s.getShape());
+				g2.fill(s.getShape());
 			}
 			
 			if(startDrag != null && endDrag != null){//the light gray temporary shape when dragging mouse
