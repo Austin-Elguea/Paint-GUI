@@ -45,7 +45,9 @@ public class PaintSurface extends JComponent {
 		}
 
 		public PaintSurface(){
-
+			
+			
+			
 			currentShape = ImplementedShape.Rectangle;
 			
 			addMouseListener(new MouseAdapter() {
