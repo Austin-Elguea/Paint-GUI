@@ -20,6 +20,7 @@ public class DrawingFrame extends JFrame{
 	public void start() {
 		add(new PaintPanel());
 		setVisible(true);
+		setResizable(false);//so that people won't accidentally make frame smaller
 	}
 		
 }
