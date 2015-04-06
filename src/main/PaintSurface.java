@@ -133,6 +133,7 @@ public class PaintSurface extends JComponent {
 		public void paint(Graphics g){
 			Graphics2D g2 = (Graphics2D)g;
 			
+			g2.setStroke(new BasicStroke(4)); //makes graphics more appealing
 			g2.setPaint(Color.WHITE);
 			
 			Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -148,7 +149,6 @@ public class PaintSurface extends JComponent {
 			// lines 84-89 paint the array of rectangles on the screen, changing colors each time
 			for(ColoredShape s : shapes) {
 				g2.setPaint(s.getColor());
-				g2.setStroke(new BasicStroke(4)); //makes graphics more appealing
 				g2.draw(s.getShape());
 				g2.fill(s.getShape());
 			}
@@ -156,6 +156,7 @@ public class PaintSurface extends JComponent {
 			if(startDrag != null && endDrag != null){//the light gray temporary shape when dragging mouse
 								//to create shape
 				g2.setPaint(Color.LIGHT_GRAY);
+				
 				
 				// You can add more shapes here.
 				switch (currentShape) {
