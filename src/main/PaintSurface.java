@@ -20,7 +20,7 @@ public class PaintSurface extends JComponent {
 	
 		// Implemented shapes.
 		public enum ImplementedShape {
-			Rectangle, Ellipse;
+			Rectangle, Ellipse, Line;
 		}
 		
 		private ArrayList<Shape> shapes = new ArrayList<Shape>();
@@ -73,6 +73,12 @@ public class PaintSurface extends JComponent {
 						Shape c = makeEllipse(startDrag.x, startDrag.y, e.getX(), e.getY());
 						shapes.add(c);
 						break;
+						
+					case Line:
+						Shape l = makeLine(startDrag.x, startDrag.y, e.getX(), e.getY());
+						shapes.add(l);
+						break;
+						
 					}
 					startDrag = null;
 					endDrag = null;
@@ -122,10 +128,9 @@ public class PaintSurface extends JComponent {
 			
 			// lines 84-89 paint the array of rectangles on the screen, changing colors each time
 			for(Shape s : shapes) {
-				g2.setPaint(Color.black);
-				g2.setStroke(new BasicStroke(8)); //makes graphics more appealing
-				g2.draw(s);
 				g2.setPaint(colors[(colorIndex++)%colors.length]);
+				g2.setStroke(new BasicStroke(4)); //makes graphics more appealing
+				g2.draw(s);
 				g2.fill(s);
 			}
 			
@@ -144,6 +149,12 @@ public class PaintSurface extends JComponent {
 					Shape c = makeEllipse(startDrag.x, startDrag.y, endDrag.x, endDrag.y);
 					g2.draw(c);
 					break;
+					
+				case Line:
+					Shape l = makeLine(startDrag.x, startDrag.y, endDrag.x, endDrag.y);
+					g2.draw(l);
+					break;
+					
 				}
 			}
 		}
@@ -166,6 +177,11 @@ public class PaintSurface extends JComponent {
 			int height = Math.abs(y1 - y2);
 			int width = Math.abs(x1 - x2);
 			return new Ellipse2D.Double(x, y, width, height);//returns the ellipse made with the above
+		}
+		
+		//draws line
+		private Line2D makeLine(int x1, int y1, int x2, int y2){
+			return new Line2D.Double(x1, y1, x2, y2);
 		}
 		
 	}
