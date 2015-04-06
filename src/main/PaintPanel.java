@@ -30,7 +30,7 @@ public class PaintPanel extends JPanel {
 		// Create buttons.
 		lineBtn = new JButton("Line");
 		clearBtn = new JButton("Clear");
-		ellipseBtn = new JButton("Ellipse");
+		ellipseBtn = new JButton("Oval");
 		rectangleBtn = new JButton("Rectangle");
 		
 		// Add action listeners to the buttons.
