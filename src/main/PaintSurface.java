@@ -122,6 +122,7 @@ public class PaintSurface extends JComponent {
 			// lines 84-89 paint the array of rectangles on the screen, changing colors each time
 			for(Shape s : shapes) {
 				g2.setPaint(Color.black);
+				g2.setStroke(new BasicStroke(8)); //makes graphics more appealing
 				g2.draw(s);
 				g2.setPaint(colors[(colorIndex++)%colors.length]);
 				g2.fill(s);
