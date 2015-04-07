@@ -19,16 +19,11 @@ import main.PaintSurface.ImplementedShape;
 public class PaintPanel extends JPanel {
 
 	// Shape choosing buttons.
-	private JButton rectangleBtn, ellipseBtn;
+	private JButton rectangleBtn, ellipseBtn, lineBtn, clearBtn;
 	
 	private JLabel backgroundColorLabel;
 	
-	// Clear button.
-	private JButton clearBtn;
-	
 	private PaintSurface surface;
-	
-	private JButton lineBtn;
 	
 	private JComboBox backgroundColorPicker;
 	
@@ -68,12 +63,13 @@ public class PaintPanel extends JPanel {
 		clearBtn.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				surface.clearShapes();
-				surface.setBackgroundColor(Color.WHITE);
+				surface.clearShapes();//clears shapes
+				surface.clearBackground();//clears background color
 			}
 			
 		});
 		
+		//depending on which button is pressed, selected shape will be used for drawing
 		ellipseBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				surface.setCurrentShape(ImplementedShape.Ellipse);
@@ -114,6 +110,7 @@ public class PaintPanel extends JPanel {
 	public void makeLayout(SpringLayout layout) {
 		
 		
+		//layout configuration below for components
 		
 		layout.putConstraint(SpringLayout.WEST, rectangleBtn, 5, SpringLayout.WEST, this);
 		layout.putConstraint(SpringLayout.NORTH, rectangleBtn, 5, SpringLayout.NORTH, this);

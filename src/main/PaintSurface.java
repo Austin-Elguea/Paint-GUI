@@ -21,7 +21,7 @@ import javax.swing.JComponent;
 public class PaintSurface extends JComponent {
 	
 		// Implemented shapes.
-		public enum ImplementedShape {
+		public enum ImplementedShape {//all shapes; add future shapes here
 			Rectangle, Ellipse, Line;
 		}
 		
@@ -35,20 +35,24 @@ public class PaintSurface extends JComponent {
 			return shapes;
 		}
 		
-		public void clearShapes() {
+		public void clearBackground(){//clears background of color
+			setBackgroundColor(Color.WHITE);
+		}
+		
+		public void clearShapes() {//erases shapes from paintsurface
 			shapes = new ArrayList<ColoredShape>();
 			repaint();
 		}
 
-		public ImplementedShape getCurrentShape() {
+		public ImplementedShape getCurrentShape() {//returns current shape
 			return currentShape;
 		}
 
-		public void setCurrentShape(ImplementedShape currentShape) {
+		public void setCurrentShape(ImplementedShape currentShape) {//sets the current shape to selected one via button
 			this.currentShape = currentShape;
 		}
 		
-		public void setBackgroundColor(Color c){
+		public void setBackgroundColor(Color c){//sets the background color
 			this.backgroundColor = c;
 		}
 		
@@ -74,17 +78,17 @@ public class PaintSurface extends JComponent {
 					if (startDrag.x == e.getX() || startDrag.y == e.getY()) return;
 					
 					switch (currentShape) {
-					case Rectangle:
+					case Rectangle://if rectangle is selected
 						Shape r = makeRectangle(startDrag.x, startDrag.y, e.getX(), e.getY());
 						shapes.add(new ColoredShape(color, r));
 						break;
 						
-					case Ellipse:
+					case Ellipse://if ellipse is selected
 						Shape c = makeEllipse(startDrag.x, startDrag.y, e.getX(), e.getY());
 						shapes.add(new ColoredShape(color, c));
 						break;
 						
-					case Line:
+					case Line://if line is selected
 						Shape l = makeLine(startDrag.x, startDrag.y, e.getX(), e.getY());
 						shapes.add(new ColoredShape(color, l));
 						break;
@@ -128,19 +132,21 @@ public class PaintSurface extends JComponent {
 		public void paint(Graphics g){
 			Graphics2D g2 = (Graphics2D)g;
 			
-			g2.setStroke(new BasicStroke(4)); //makes graphics more appealing
+			g2.setStroke(new BasicStroke(4)); //makes graphics more appealing.
 			g2.setPaint(Color.WHITE);
 			
-			Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+			Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();//get the dimensions of the screen.
 			int width = (int)screenSize.getWidth();
 			int height = (int)screenSize.getHeight();
 		
-			Shape background = makeRectangle(0,0,width,height);
-			g2.draw(background);
+			Shape background = makeRectangle(0,0,(width+200),(height+200));//make rectangle that represents the background.
+			
+			g2.draw(background);//draw background
+			
 			g2.setPaint(backgroundColor); // NOTE: You can use the variable background color here instead of
 											//  	calling the getBackgroundColor() method bc it is within the class.
 			g2.fill(background);
-			repaint();
+			repaint();//every time new color is selected, repaint the background
 						
 			// lines 84-89 paint the array of rectangles on the screen, changing colors each time
 			for(ColoredShape s : shapes) {
@@ -150,23 +156,22 @@ public class PaintSurface extends JComponent {
 			}
 			
 			if(startDrag != null && endDrag != null){//the light gray temporary shape when dragging mouse
-								//to create shape
+													//to create shape
 				g2.setPaint(Color.LIGHT_GRAY);
-				
 				
 				// You can add more shapes here.
 				switch (currentShape) {
-				case Rectangle:
+				case Rectangle://if rectangle is selected
 					Shape r = makeRectangle(startDrag.x, startDrag.y, endDrag.x, endDrag.y);
 					g2.draw(r);
 					break;
 				
-				case Ellipse:
+				case Ellipse://if ellipse is selected
 					Shape c = makeEllipse(startDrag.x, startDrag.y, endDrag.x, endDrag.y);
 					g2.draw(c);
 					break;
 					
-				case Line:
+				case Line://if line is selected
 					Shape l = makeLine(startDrag.x, startDrag.y, endDrag.x, endDrag.y);
 					g2.draw(l);
 					break;
@@ -195,7 +200,7 @@ public class PaintSurface extends JComponent {
 			return new Ellipse2D.Double(x, y, width, height);//returns the ellipse made with the above
 		}
 		
-		//draws line
+		//draws line based on starting x and y values and ending x and y values (from dragging mouse)
 		private Line2D makeLine(int x1, int y1, int x2, int y2){
 			return new Line2D.Double(x1, y1, x2, y2);
 		}
