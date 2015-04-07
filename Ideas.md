@@ -1,6 +1,6 @@
 # Some ideas for my Paint application:
 
-- Background color changer i.e such as a drop down box with 10 or so colors to choose from
+- Background color changer i.e such as a drop down box with 10 or so colors to choose from *FINISHED*
 
 - More shapes to draw
 
