@@ -69,6 +69,7 @@ public class PaintPanel extends JPanel {
 
 			public void actionPerformed(ActionEvent e) {
 				surface.clearShapes();
+				surface.setBackgroundColor(Color.WHITE);
 			}
 			
 		});
