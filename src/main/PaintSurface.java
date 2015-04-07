@@ -66,7 +66,7 @@ public class PaintSurface extends JComponent {
 				
 				public void mousePressed(MouseEvent e) {
 					startDrag = new Point(e.getX(), e.getY());	// gets the xy coordinate when 
-										  						// mouse is pressed
+										  		// mouse is pressed
 					endDrag = startDrag;
 					repaint();
 				}
