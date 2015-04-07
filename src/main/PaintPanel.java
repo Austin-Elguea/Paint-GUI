@@ -21,11 +21,11 @@ public class PaintPanel extends JPanel {
 	// Shape choosing buttons.
 	private JButton rectangleBtn, ellipseBtn, lineBtn, clearBtn;
 	
-	private JLabel backgroundColorLabel;
+	private JLabel backgroundColorLabel, shapeColorLabel;
 	
 	private PaintSurface surface;
 	
-	private JComboBox backgroundColorPicker;
+	private JComboBox backgroundColorPicker, shapeColorPicker;
 	
 	public PaintPanel() {
 		super();
@@ -52,6 +52,21 @@ public class PaintPanel extends JPanel {
 			public void itemStateChanged(ItemEvent e) {
 				if(e.getStateChange()==ItemEvent.SELECTED){
 					surface.setBackgroundColor(colors[backgroundColorPicker.getSelectedIndex()]);
+				}
+			}
+			
+			
+		});
+		
+		//create shape color chooser
+		shapeColorPicker = new JComboBox<String>(colorsNames);
+		shapeColorLabel = new JLabel("Shape Color: ");
+		
+		shapeColorPicker.addItemListener(new ItemListener(){
+
+			public void itemStateChanged(ItemEvent e) {
+				if(e.getStateChange()==ItemEvent.SELECTED){
+					surface.setShapeColor(colors[shapeColorPicker.getSelectedIndex()]);
 				}
 			}
 			
@@ -97,6 +112,8 @@ public class PaintPanel extends JPanel {
 		
 		
 		// Add components.
+		add(shapeColorLabel);
+		add(shapeColorPicker);
 		add(backgroundColorLabel);
 		add(backgroundColorPicker);
 		add(lineBtn);
@@ -130,7 +147,14 @@ public class PaintPanel extends JPanel {
 		layout.putConstraint(SpringLayout.NORTH,backgroundColorPicker, 5, SpringLayout.NORTH, this);
 		
 
-		layout.putConstraint(SpringLayout.WEST, clearBtn, 5, SpringLayout.EAST, backgroundColorPicker);
+		layout.putConstraint(SpringLayout.WEST, shapeColorLabel, 5, SpringLayout.EAST, backgroundColorPicker);
+		layout.putConstraint(SpringLayout.NORTH, shapeColorLabel, 5, SpringLayout.NORTH, this);
+		
+		layout.putConstraint(SpringLayout.WEST, shapeColorPicker, 5, SpringLayout.EAST, shapeColorLabel);
+		layout.putConstraint(SpringLayout.NORTH, shapeColorPicker, 5, SpringLayout.NORTH, this);
+		
+
+		layout.putConstraint(SpringLayout.WEST, clearBtn, 5, SpringLayout.EAST, shapeColorPicker);
 		layout.putConstraint(SpringLayout.NORTH, clearBtn, 5, SpringLayout.NORTH, this);
 		
 		layout.putConstraint(SpringLayout.WEST, surface, 0, SpringLayout.WEST, this);

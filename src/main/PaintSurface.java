@@ -56,11 +56,14 @@ public class PaintSurface extends JComponent {
 			this.backgroundColor = c;
 		}
 		
+		public void setShapeColor(Color c){//sets the background color
+			this.color = c;
+		}
+		
 		public PaintSurface(){
 			
 			
 			currentShape = ImplementedShape.Rectangle;
-			color = Color.RED;
 			
 			addMouseListener(new MouseAdapter() {
 				
@@ -74,23 +77,25 @@ public class PaintSurface extends JComponent {
 				public void mouseReleased(MouseEvent e){//when mouse is released, adds the rectangle 
 									//made to the array of shapes for drawing later on
 					
-					// No 0D or 1D shapes.
-					if (startDrag.x == e.getX() || startDrag.y == e.getY()) return;
+					// No 1D shapes.
+					if (startDrag.x == e.getX() && startDrag.y == e.getY()) return;
+					
+					Shape s;
 					
 					switch (currentShape) {
 					case Rectangle://if rectangle is selected
-						Shape r = makeRectangle(startDrag.x, startDrag.y, e.getX(), e.getY());
-						shapes.add(new ColoredShape(color, r));
+						s = makeRectangle(startDrag.x, startDrag.y, e.getX(), e.getY());
+						shapes.add(new ColoredShape(color, s));
 						break;
 						
 					case Ellipse://if ellipse is selected
-						Shape c = makeEllipse(startDrag.x, startDrag.y, e.getX(), e.getY());
-						shapes.add(new ColoredShape(color, c));
+						s = makeEllipse(startDrag.x, startDrag.y, e.getX(), e.getY());
+						shapes.add(new ColoredShape(color, s));
 						break;
 						
 					case Line://if line is selected
-						Shape l = makeLine(startDrag.x, startDrag.y, e.getX(), e.getY());
-						shapes.add(new ColoredShape(color, l));
+						s = makeLine(startDrag.x, startDrag.y, e.getX(), e.getY());
+						shapes.add(new ColoredShape(color, s));
 						break;
 						
 					}
@@ -160,20 +165,23 @@ public class PaintSurface extends JComponent {
 				g2.setPaint(Color.LIGHT_GRAY);
 				
 				// You can add more shapes here.
+				
+				Shape s;
+				
 				switch (currentShape) {
 				case Rectangle://if rectangle is selected
-					Shape r = makeRectangle(startDrag.x, startDrag.y, endDrag.x, endDrag.y);
-					g2.draw(r);
+					s = makeRectangle(startDrag.x, startDrag.y, endDrag.x, endDrag.y);
+					g2.draw(s);
 					break;
 				
 				case Ellipse://if ellipse is selected
-					Shape c = makeEllipse(startDrag.x, startDrag.y, endDrag.x, endDrag.y);
-					g2.draw(c);
+					s = makeEllipse(startDrag.x, startDrag.y, endDrag.x, endDrag.y);
+					g2.draw(s);
 					break;
 					
 				case Line://if line is selected
-					Shape l = makeLine(startDrag.x, startDrag.y, endDrag.x, endDrag.y);
-					g2.draw(l);
+					s = makeLine(startDrag.x, startDrag.y, endDrag.x, endDrag.y);
+					g2.draw(s);
 					break;
 					
 				}
