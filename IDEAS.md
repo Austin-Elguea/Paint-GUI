@@ -1,6 +1,6 @@
 # Some ideas for my Paint application:
 
-- More shapes to draw
+- More shapes to draw.
 
 - Textbox ? Adding text to the paint surface
 
@@ -8,7 +8,7 @@
 
 - Inserting images from computer files
 
-- Allow users to change font of text
+- Allow users to change font of text.
 
 - General color picker.. Instead of the color array add color buttons down the side or something.
 
