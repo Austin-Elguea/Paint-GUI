@@ -78,7 +78,10 @@ public class PaintSurface extends JComponent {
 									//made to the array of shapes for drawing later on
 					
 					// No 1D shapes.
-					if (startDrag.x == e.getX() && startDrag.y == e.getY()) return;
+					if (startDrag.x == e.getX() && startDrag.y == e.getY()) {
+						startDrag = null;
+						return;
+					}
 					
 					Shape s;
 					
