@@ -217,5 +217,7 @@ public class PaintPanel extends JPanel {
 		colorMap.put("Blue", Color.BLUE);
 		colorMap.put("Green", Color.GREEN);
 		colorMap.put("Pink", Color.PINK);
+		colorMap.put("Yellow", Color.YELLOW);
+		colorMap.put("Purple", new Color(100, 0, 200));
 	}
 }

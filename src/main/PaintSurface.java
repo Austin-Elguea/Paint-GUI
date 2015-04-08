@@ -24,7 +24,7 @@ public class PaintSurface extends JComponent {
 		 * Implemented shapes.
 		 */
 		public enum ImplementedShape {//all shapes; add future shapes here
-			Rectangle, Ellipse, Line;
+			Rectangle, Ellipse, Line, Text;
 		}
 		
 		/**
@@ -150,7 +150,6 @@ public class PaintSurface extends JComponent {
 						s = makeLine(startDrag.x, startDrag.y, e.getX(), e.getY());
 						shapes.add(new ColoredShape(shapeColor, s));
 						break;
-						
 					}
 					startDrag = null;
 					endDrag = null;
@@ -300,5 +299,6 @@ public class PaintSurface extends JComponent {
 		private Line2D makeLine(int x1, int y1, int x2, int y2){
 			return new Line2D.Double(x1, y1, x2, y2);
 		}
+		
 		
 	}

@@ -1,5 +1,7 @@
 package main;
 
+import java.awt.Dimension;
+
 import javax.swing.JFrame;
 
 public class DrawingFrame extends JFrame{
@@ -17,6 +19,8 @@ public class DrawingFrame extends JFrame{
 		super(title); // title for the application
 		setExtendedState(MAXIMIZED_BOTH); // make jframe fullscreen
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setMinimumSize(new Dimension(1000,700));//setting the minimum size that the frame can be
+		setLocationRelativeTo(null);
 	}
 	
 	/**
