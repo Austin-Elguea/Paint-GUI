@@ -20,46 +20,96 @@ import javax.swing.JComponent;
 
 public class PaintSurface extends JComponent {
 	
-		// Implemented shapes.
+		/**
+		 * Implemented shapes.
+		 */
 		public enum ImplementedShape {//all shapes; add future shapes here
 			Rectangle, Ellipse, Line;
 		}
 		
+		/**
+		 * ArrayList to store current shapes.
+		 */
 		private ArrayList<ColoredShape> shapes = new ArrayList<ColoredShape>();
+		
+		/**
+		 * Start and end drag points.
+		 */
 		private Point startDrag, endDrag;
+		
+		/**
+		 * Stores current shape.
+		 */
 		private ImplementedShape currentShape;
-		private Color color;
+		
+		/**
+		 * Current shape color.
+		 */
+		private Color shapeColor;
+		
+		/**
+		 * Current background color.
+		 */
 		private Color backgroundColor;
 		
+		/**
+		 * Shapes getter.
+		 * @return All shapes.
+		 */
 		public ArrayList<ColoredShape> getShapes() {
 			return shapes;
 		}
 		
+		/**
+		 * Clears background.
+		 */
 		public void clearBackground(){//clears background of color
 			setBackgroundColor(Color.WHITE);
 		}
 		
+		/**
+		 * Clears shapes.
+		 */
 		public void clearShapes() {//erases shapes from paintsurface
 			shapes = new ArrayList<ColoredShape>();
 			repaint();
 		}
 
+		/**
+		 * Current shape getter.
+		 * @return current shape.
+		 */
 		public ImplementedShape getCurrentShape() {//returns current shape
 			return currentShape;
 		}
 
+		/**
+		 * Current shape setter.
+		 * @param currentShape new shape.
+		 */
 		public void setCurrentShape(ImplementedShape currentShape) {//sets the current shape to selected one via button
 			this.currentShape = currentShape;
 		}
 		
+		/**
+		 * Background color setter.
+		 * @param c new color.
+		 */
 		public void setBackgroundColor(Color c){//sets the background color
 			this.backgroundColor = c;
 		}
 		
+		/**
+		 * Shape color setter.
+		 * @param c new color.
+		 */
 		public void setShapeColor(Color c){//sets the background color
-			this.color = c;
+			this.shapeColor = c;
 		}
 		
+		/**
+		 * Constructor.		
+		 */
 		public PaintSurface(){
 			
 			
@@ -88,17 +138,17 @@ public class PaintSurface extends JComponent {
 					switch (currentShape) {
 					case Rectangle://if rectangle is selected
 						s = makeRectangle(startDrag.x, startDrag.y, e.getX(), e.getY());
-						shapes.add(new ColoredShape(color, s));
+						shapes.add(new ColoredShape(shapeColor, s));
 						break;
 						
 					case Ellipse://if ellipse is selected
 						s = makeEllipse(startDrag.x, startDrag.y, e.getX(), e.getY());
-						shapes.add(new ColoredShape(color, s));
+						shapes.add(new ColoredShape(shapeColor, s));
 						break;
 						
 					case Line://if line is selected
 						s = makeLine(startDrag.x, startDrag.y, e.getX(), e.getY());
-						shapes.add(new ColoredShape(color, s));
+						shapes.add(new ColoredShape(shapeColor, s));
 						break;
 						
 					}
@@ -120,23 +170,37 @@ public class PaintSurface extends JComponent {
 			
 		}	
 		
+		/**
+		 * Helper constructor.
+		 * @param currentShape shape to start with.
+		 */
 		public PaintSurface(ImplementedShape currentShape) {
 			this();
 			this.currentShape = currentShape;
 		}
 		
+		/**
+		 * Helper constructor.
+		 * @param color color to start with.
+		 */
 		public PaintSurface(Color color) {
 			this();
-			this.color = color;
+			this.shapeColor = color;
 		}
 		
+		/**
+		 * Helper constructor.
+		 * @param currentShape shape to start with.
+		 * @param color color to start with.
+		 */
 		public PaintSurface(ImplementedShape currentShape, Color color) {
-			this();
-			this.currentShape = currentShape;
-			this.color = color;
+			this(currentShape);
+			this.shapeColor = color;
 		}		
 		
-		// draw grid, then draw shapes
+		/**
+		 * Draw shapes.
+		 */
 		public void paint(Graphics g){
 			Graphics2D g2 = (Graphics2D)g;
 			
@@ -191,8 +255,15 @@ public class PaintSurface extends JComponent {
 			}
 		}
 		
-		//makes rectangle based on the minimum x and y values with height and width equal to absolute 
-		//value of y's and x's
+		/**
+		 * makes rectangle based on the minimum x and y values with height and width equal to absolute 
+		 * value of y's and x's
+		 * @param x1
+		 * @param y1
+		 * @param x2
+		 * @param y2
+		 * @return
+		 */
 		private Rectangle2D makeRectangle(int x1, int y1, int x2, int y2){
 			int x = Math.min(x1, x2);
 			int y = Math.min(y1, y2);
@@ -201,8 +272,15 @@ public class PaintSurface extends JComponent {
 			return new Rectangle2D.Double(x, y, width, height);//returns the rectangle made with the above
 		}
 		
-		//makes ellipse based on the minimum x and y values with height and width equal to absolute 
-		//value of y's and x's
+		/**
+		 * makes ellipse based on the minimum x and y values with height and width equal to absolute 
+		 * value of y's and x's
+		 * @param x1
+		 * @param y1
+		 * @param x2
+		 * @param y2
+		 * @return
+		 */
 		private Ellipse2D makeEllipse(int x1, int y1, int x2, int y2){
 			int x = Math.min(x1, x2);
 			int y = Math.min(y1, y2);
@@ -211,7 +289,14 @@ public class PaintSurface extends JComponent {
 			return new Ellipse2D.Double(x, y, width, height);//returns the ellipse made with the above
 		}
 		
-		//draws line based on starting x and y values and ending x and y values (from dragging mouse)
+		/**
+		 * draws line based on starting x and y values and ending x and y values (from dragging mouse)
+		 * @param x1
+		 * @param y1
+		 * @param x2
+		 * @param y2
+		 * @return
+		 */
 		private Line2D makeLine(int x1, int y1, int x2, int y2){
 			return new Line2D.Double(x1, y1, x2, y2);
 		}

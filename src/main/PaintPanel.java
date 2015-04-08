@@ -19,20 +19,39 @@ import main.PaintSurface.ImplementedShape;
 
 public class PaintPanel extends JPanel {
 	
-	// Main surface.
+	/**
+	 * Main surface.
+	 */
 	private PaintSurface surface;
-
-	// Shape choosing buttons.
-	private JButton rectangleBtn, ellipseBtn, lineBtn, clearBtn;
 	
-	// Labels
+	/**
+	 * Clear button.
+	 */
+	private JButton clearBtn;
+
+	/**
+	 * Shape choosing buttons.
+	 */
+	private JButton rectangleBtn, ellipseBtn, lineBtn;
+	
+	/**
+	 * Labels.
+	 */
 	private JLabel backgroundColorLabel, shapeColorLabel;
 	
+	/**
+	 * Color pickers.
+	 */
 	private JComboBox<String> backgroundColorPicker, shapeColorPicker;
 	
-	// Map names to color objects.
+	/**
+	 * Map names to Color objects.
+	 */
 	HashMap<String, Color> colorMap;
 	
+	/**
+	 * Only constructor.
+	 */
 	public PaintPanel() {
 		super();
 		
@@ -145,6 +164,10 @@ public class PaintPanel extends JPanel {
 
 	}
 	
+	/**
+	 * Make the SpringLayout.
+	 * @param layout SpringLayout to add the constraints to.
+	 */
 	private void makeLayout(SpringLayout layout) {
 		
 		
@@ -184,6 +207,10 @@ public class PaintPanel extends JPanel {
 		layout.putConstraint(SpringLayout.SOUTH, surface, 0, SpringLayout.SOUTH, this);
 	}
 	
+	/**
+	 * Fill colors into map.
+	 * @param colorMap HashMap to fill.
+	 */
 	public void fillColors(HashMap<String, Color> colorMap) {
 		colorMap.put("White", Color.WHITE);
 		colorMap.put("Red", Color.RED);
