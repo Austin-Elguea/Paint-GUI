@@ -28,7 +28,6 @@ public class PaintPanel extends JPanel {
 	// Labels
 	private JLabel backgroundColorLabel, shapeColorLabel;
 	
-	
 	private JComboBox<String> backgroundColorPicker, shapeColorPicker;
 	
 	// Map names to color objects.
@@ -45,11 +44,14 @@ public class PaintPanel extends JPanel {
 		ellipseBtn = new JButton("Oval");
 		rectangleBtn = new JButton("Rectangle");
 		
+		// Make labels.
+		Font colorLabelFont = new Font("Verdana", Font.BOLD, 16);
 		backgroundColorLabel = new JLabel("Background Color: ");
-		backgroundColorLabel.setFont(new Font("Verdana", Font.BOLD, 16));
+		shapeColorLabel = new JLabel("Shape Color: ");
+		backgroundColorLabel.setFont(colorLabelFont);
+		shapeColorLabel.setFont(colorLabelFont);
 		
-		// Create background color chooser.
-		
+		// Create background color chooser.	
 		// Make a dictionary mapping the JComboBox values to a color object.
 		colorMap = new HashMap<String, Color>();
 		fillColors(colorMap);
@@ -75,7 +77,6 @@ public class PaintPanel extends JPanel {
 		//create shape color chooser
 		shapeColorPicker = new JComboBox<String>(colors);
 		shapeColorPicker.setSelectedItem("Red");
-		shapeColorLabel = new JLabel("Shape Color: ");
 		surface.setShapeColor(colorMap.get((String)shapeColorPicker.getSelectedItem()));
 		
 		shapeColorPicker.addItemListener(new ItemListener(){
