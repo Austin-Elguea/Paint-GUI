@@ -214,10 +214,11 @@ public class PaintPanel extends JPanel {
 	public void fillColors(HashMap<String, Color> colorMap) {
 		colorMap.put("White", Color.WHITE);
 		colorMap.put("Red", Color.RED);
-		colorMap.put("Blue", Color.BLUE);
-		colorMap.put("Green", Color.GREEN);
-		colorMap.put("Pink", Color.PINK);
+		colorMap.put("Blue", Color.decode("#00B2EE"));
+		colorMap.put("Green", Color.decode("#00EE00"));
+		colorMap.put("Pink", Color.MAGENTA);
 		colorMap.put("Yellow", Color.YELLOW);
 		colorMap.put("Purple", new Color(100, 0, 200));
+		colorMap.put("Black", Color.BLACK);
 	}
 }
