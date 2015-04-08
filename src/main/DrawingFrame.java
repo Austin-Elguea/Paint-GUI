@@ -9,7 +9,7 @@ public class DrawingFrame extends JFrame{
 	/**
 	 * Default title for frame.
 	 */
-	public static String DEFUALT_TITLE = "Austin's Paint App";
+	public static String DEFUALT_TITLE = "Paint App";
 	
 	/**
 	 * Constructor.
