@@ -2,6 +2,8 @@
 
 - More shapes to draw.
 
+- Undo Button.
+
 - Textbox ? Adding text to the paint surface
 
 - Saving creations as a JPEG file ?
