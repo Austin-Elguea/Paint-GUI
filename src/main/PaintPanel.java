@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.HashMap;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -17,15 +18,21 @@ import main.PaintSurface.ImplementedShape;
 
 
 public class PaintPanel extends JPanel {
+	
+	// Main surface.
+	private PaintSurface surface;
 
 	// Shape choosing buttons.
 	private JButton rectangleBtn, ellipseBtn, lineBtn, clearBtn;
 	
+	// Labels
 	private JLabel backgroundColorLabel, shapeColorLabel;
 	
-	private PaintSurface surface;
 	
-	private JComboBox backgroundColorPicker, shapeColorPicker;
+	private JComboBox<String> backgroundColorPicker, shapeColorPicker;
+	
+	// Map names to color objects.
+	HashMap<String, Color> colorMap;
 	
 	public PaintPanel() {
 		super();
@@ -41,32 +48,41 @@ public class PaintPanel extends JPanel {
 		backgroundColorLabel = new JLabel("Background Color: ");
 		backgroundColorLabel.setFont(new Font("Verdana", Font.BOLD, 16));
 		
+		// Create background color chooser.
 		
-		//create background color chooser
-		String[] colorsNames = {"White","Red", "Blue", "Green", "Pink"};
-		final Color[] colors = {Color.WHITE,Color.RED, Color.BLUE, Color.GREEN, Color.pink};
+		// Make a dictionary mapping the JComboBox values to a color object.
+		colorMap = new HashMap<String, Color>();
+		fillColors(colorMap);
+		String[] colors = new String[colorMap.keySet().size()];
 		
-		backgroundColorPicker = new JComboBox<String>(colorsNames);
+		int i = 0;
+		for (String key: colorMap.keySet()) {
+			colors[i++] = key;
+		}
+		
+		backgroundColorPicker = new JComboBox<String>(colors);
+		backgroundColorPicker.setSelectedItem("White");
 		backgroundColorPicker.addItemListener(new ItemListener(){
 
 			public void itemStateChanged(ItemEvent e) {
 				if(e.getStateChange()==ItemEvent.SELECTED){
-					surface.setBackgroundColor(colors[backgroundColorPicker.getSelectedIndex()]);
+					surface.setBackgroundColor(colorMap.get((String)backgroundColorPicker.getSelectedItem()));
 				}
-			}
-			
+			}			
 			
 		});
 		
 		//create shape color chooser
-		shapeColorPicker = new JComboBox<String>(colorsNames);
+		shapeColorPicker = new JComboBox<String>(colors);
+		shapeColorPicker.setSelectedItem("Red");
 		shapeColorLabel = new JLabel("Shape Color: ");
+		surface.setShapeColor(colorMap.get((String)shapeColorPicker.getSelectedItem()));
 		
 		shapeColorPicker.addItemListener(new ItemListener(){
 
 			public void itemStateChanged(ItemEvent e) {
 				if(e.getStateChange()==ItemEvent.SELECTED){
-					surface.setShapeColor(colors[shapeColorPicker.getSelectedIndex()]);
+					surface.setShapeColor(colorMap.get((String)shapeColorPicker.getSelectedItem()));
 				}
 			}
 			
@@ -80,6 +96,10 @@ public class PaintPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				surface.clearShapes();//clears shapes
 				surface.clearBackground();//clears background color
+				
+				// Set color pickers back to white and red.
+				backgroundColorPicker.setSelectedItem("White");
+				shapeColorPicker.setSelectedItem("Red");
 			}
 			
 		});
@@ -124,7 +144,7 @@ public class PaintPanel extends JPanel {
 
 	}
 	
-	public void makeLayout(SpringLayout layout) {
+	private void makeLayout(SpringLayout layout) {
 		
 		
 		//layout configuration below for components
@@ -161,5 +181,13 @@ public class PaintPanel extends JPanel {
 		layout.putConstraint(SpringLayout.NORTH, surface, 0, SpringLayout.NORTH, this);
 		layout.putConstraint(SpringLayout.EAST, surface, 0, SpringLayout.EAST, this);
 		layout.putConstraint(SpringLayout.SOUTH, surface, 0, SpringLayout.SOUTH, this);
+	}
+	
+	public void fillColors(HashMap<String, Color> colorMap) {
+		colorMap.put("White", Color.WHITE);
+		colorMap.put("Red", Color.RED);
+		colorMap.put("Blue", Color.BLUE);
+		colorMap.put("Green", Color.GREEN);
+		colorMap.put("Pink", Color.PINK);
 	}
 }
