@@ -2,8 +2,6 @@
 
 - More shapes to draw.
 
-- Undo Button.
-
 - Textbox ? Adding text to the paint surface
 
 - Saving creations as a JPEG file ?
@@ -18,5 +16,9 @@
 
 - Background color changer i.e such as a drop down box with 10 or so colors to choose from.
 
+- Undo Button.
+
+
 # Down the road.
+
 - EVENTUALLY, a mobile app ??

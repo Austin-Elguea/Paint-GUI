@@ -74,6 +74,13 @@ public class PaintSurface extends JComponent {
 			shapes = new ArrayList<ColoredShape>();
 			repaint();
 		}
+		
+		/**
+		 * Removes the last added shape.
+		 */
+		public void undoShapeAdd() {
+			shapes.remove(shapes.size() - 1);
+		}
 
 		/**
 		 * Current shape getter.

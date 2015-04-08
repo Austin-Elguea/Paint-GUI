@@ -28,6 +28,11 @@ public class PaintPanel extends JPanel {
 	 * Clear button.
 	 */
 	private JButton clearBtn;
+	
+	/**
+	 * Undo button
+	 */
+	private JButton undoBtn;
 
 	/**
 	 * Shape choosing buttons.
@@ -60,6 +65,7 @@ public class PaintPanel extends JPanel {
 		// Create buttons.
 		lineBtn = new JButton("Line");
 		clearBtn = new JButton("Clear");
+		undoBtn = new JButton("Undo");
 		ellipseBtn = new JButton("Oval");
 		rectangleBtn = new JButton("Rectangle");
 		
@@ -124,6 +130,14 @@ public class PaintPanel extends JPanel {
 			
 		});
 		
+		undoBtn.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				surface.undoShapeAdd();
+			}
+			
+		});
+		
 		//depending on which button is pressed, selected shape will be used for drawing
 		ellipseBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -159,6 +173,7 @@ public class PaintPanel extends JPanel {
 		add(lineBtn);
 		add(rectangleBtn);
 		add(clearBtn);
+		add(undoBtn);
 		add(ellipseBtn);
 		add(surface);
 
@@ -200,6 +215,9 @@ public class PaintPanel extends JPanel {
 
 		layout.putConstraint(SpringLayout.WEST, clearBtn, 5, SpringLayout.EAST, shapeColorPicker);
 		layout.putConstraint(SpringLayout.NORTH, clearBtn, 5, SpringLayout.NORTH, this);
+		
+		layout.putConstraint(SpringLayout.WEST, undoBtn, 5, SpringLayout.EAST, clearBtn);
+		layout.putConstraint(SpringLayout.NORTH, undoBtn, 5, SpringLayout.NORTH, this);
 		
 		layout.putConstraint(SpringLayout.WEST, surface, 0, SpringLayout.WEST, this);
 		layout.putConstraint(SpringLayout.NORTH, surface, 0, SpringLayout.NORTH, this);

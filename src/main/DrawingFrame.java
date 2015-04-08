@@ -21,6 +21,7 @@ public class DrawingFrame extends JFrame{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setMinimumSize(new Dimension(1000,700));//setting the minimum size that the frame can be
 		setLocationRelativeTo(null);
+
 	}
 	
 	/**
