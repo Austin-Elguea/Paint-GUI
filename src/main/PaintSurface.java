@@ -79,7 +79,8 @@ public class PaintSurface extends JComponent {
 		 * Removes the last added shape.
 		 */
 		public void undoShapeAdd() {
-			shapes.remove(shapes.size() - 1);
+			if (shapes.size() > 0)
+				shapes.remove(shapes.size() - 1);
 		}
 
 		/**
