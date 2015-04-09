@@ -17,9 +17,9 @@ public class DrawingFrame extends JFrame{
 	 */
 	public DrawingFrame(String title){
 		super(title); // title for the application
-		setExtendedState(MAXIMIZED_BOTH); // make jframe fullscreen
+		setSize(1000,700);//starting size is in middle and small
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setMinimumSize(new Dimension(1000,700));//setting the minimum size that the frame can be
+		this.setMaximumSize(new Dimension((PaintSurface.WIDTH+200), (PaintSurface.HEIGHT+200)));;//setting the maximum size that the frame can be
 		setLocationRelativeTo(null);
 
 	}
