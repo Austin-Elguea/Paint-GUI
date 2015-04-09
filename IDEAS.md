@@ -10,13 +10,13 @@
 
 - Allow users to change font of text.
 
-- General color picker.. Instead of the color array add color buttons down the side or something.
-
 *FINISHED*
 
 - Background color changer i.e such as a drop down box with 10 or so colors to choose from.
 
 - Undo Button.
+
+- General color picker.. Instead of the color array add color buttons down the side or something.
 
 
 # Down the road.
