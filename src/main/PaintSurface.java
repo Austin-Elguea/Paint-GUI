@@ -135,9 +135,9 @@ public class PaintSurface extends JComponent {
 				public void mouseReleased(MouseEvent e){//when mouse is released, adds the rectangle 
 									//made to the array of shapes for drawing later on
 					
-					// No 1D shapes.
-					if (startDrag.x == e.getX() && startDrag.y == e.getY()) {
-						startDrag = null;
+		 			// No 1D shapes.
+		 			if (startDrag.x == e.getX() && startDrag.y == e.getY()) {
+		  				startDrag = null;
 						return;
 					}
 					
@@ -159,6 +159,7 @@ public class PaintSurface extends JComponent {
 						shapes.add(new ColoredShape(shapeColor, s));
 						break;
 					default: //Because why not
+						s = null;
 						break;
 					}
 					startDrag = null;
@@ -171,7 +172,7 @@ public class PaintSurface extends JComponent {
 			addMouseMotionListener(new MouseMotionAdapter(){
 				
 				public void mouseDragged(MouseEvent e){
-					endDrag = new Point(e.getX(), e.getY());
+		 			endDrag = new Point(e.getX(), e.getY());
 					repaint();
 				}
 				
