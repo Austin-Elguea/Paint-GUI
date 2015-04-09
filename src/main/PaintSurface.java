@@ -158,6 +158,8 @@ public class PaintSurface extends JComponent {
 						s = makeLine(startDrag.x, startDrag.y, e.getX(), e.getY());
 						shapes.add(new ColoredShape(shapeColor, s));
 						break;
+					default: //Because why not
+						break;
 					}
 					startDrag = null;
 					endDrag = null;
