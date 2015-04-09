@@ -259,6 +259,8 @@ public class PaintSurface extends JComponent {
 					s = makeLine(startDrag.x, startDrag.y, endDrag.x, endDrag.y);
 					g2.draw(s);
 					break;
+				default: // Just because
+					break;
 					
 				}
 			}
