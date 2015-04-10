@@ -1,4 +1,4 @@
-# Some ideas for my Paint application:
+# Some ideas for the Paint application:
 
 - More shapes to draw.
 
