@@ -6,6 +6,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.HashMap;
 
 import javax.swing.JButton;
@@ -59,6 +62,7 @@ public class PaintPanel extends JPanel {
 	 */
 	public PaintPanel() {
 		super();
+		
 		
 		surface = new PaintSurface();
 		
@@ -157,6 +161,17 @@ public class PaintPanel extends JPanel {
 			}
 		});
 		
+		
+		this.addKeyListener(new KeyAdapter(){//if ctrl and z button pressed, undo
+
+			public void keyPressed(KeyEvent e) {
+				if((e.getKeyCode()==KeyEvent.VK_Z) && ((e.getModifiers() & ActionEvent.CTRL_MASK) ==ActionEvent.CTRL_MASK)){
+					surface.undoShapeAdd();
+				}
+			}
+
+		});
+		
 		// Make layout.
 		SpringLayout layout = new SpringLayout();
 
@@ -176,6 +191,8 @@ public class PaintPanel extends JPanel {
 		add(undoBtn);
 		add(ellipseBtn);
 		add(surface);
+		setFocusable(true);
+		requestFocusInWindow();
 
 	}
 	
